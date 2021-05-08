@@ -37,5 +37,19 @@ function generatePallete(e) {
   return pallete;
 }
 
+function showPallets(e) {
+  return;
+}
+
+function savePallete(e) {
+
+}
+
 document.querySelector('#generate-btn')
   .addEventListener('click', generatePallete);
+
+document.querySelector('#library-btn')
+  .addEventListener('click', showPallets);
+
+document.querySelector('#save-btn')
+  .addEventListener('click', savePallete);
