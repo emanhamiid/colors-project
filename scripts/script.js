@@ -7,9 +7,6 @@ gitclass Colors {
     this.profiles.push(profile);
   }
 
-  loadProfile() {}
-
-
   static get RandomHex() {
     const hexCode = "0123456789ABCDEF";
     let hex = '#';
