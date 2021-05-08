@@ -1,13 +1,13 @@
-gitclass Colors {
+class Colors {
   constructor() {
-    this.profiles = [];
+    this.palletes = [];
   }
 
-  addProfiles(profile) {
-    this.profiles.push(profile);
+  addPallete(pallete) {
+    this.palletes.push(pallete);
   }
 
-  static get RandomHex() {
+  static get randomHex() {
     const hexCode = "0123456789ABCDEF";
     let hex = '#';
     for (let i = 0; i < 6; i++)
@@ -16,22 +16,23 @@ gitclass Colors {
     return hex;
   }
 }
+const userColors = new Colors();
 
-const userColors = new Color();
+function generatePallete() {
+  const pallete = [];
 
-function generateProfile() {
-  const profile = [];
-  document.querySelector(".colors")
-    .children.forEach(color => {
-      const changeColor = color.querySelector('span');
-      console.log(changeColor);
-      if (changeColor)
-        return;
-      const randomHex = Colors.RandomHex;
-      color.style.backgroundColor = randomHex;
-      color.querySelector('#hex-value')
-        .innerText = randomHex;
-      profile.push(randomHex);
-    });
-  return profile;
+  const colorDivs = Array.from(document.querySelector(".colors")
+    .children);
+
+  colorDivs.forEach(color => {
+    const doNotChangeColor = color.querySelector('input');
+    if (doNotChangeColor.checked)
+      return pallete.push(color.style.backgroundColor);
+    const randomHex = Colors.randomHex;
+    color.style.backgroundColor = randomHex;
+    color.querySelector('div')
+      .innerText = randomHex;
+    pallete.push(randomHex);
+  });
+  return pallete;
 }
