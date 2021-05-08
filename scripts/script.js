@@ -18,7 +18,7 @@ class Colors {
 }
 const userColors = new Colors();
 
-function generatePallete() {
+function generatePallete(e) {
   const pallete = [];
 
   const colorDivs = Array.from(document.querySelector(".colors")
@@ -36,3 +36,6 @@ function generatePallete() {
   });
   return pallete;
 }
+
+document.querySelector('#generate-btn')
+  .addEventListener('click', generatePallete);

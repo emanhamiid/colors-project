@@ -28,7 +28,7 @@
   height         : 16vh;
 }
 
-.btn {
+.btns > button {
   padding         : 10px;
   background-color: white;
   border          : 1 px solid gray;
