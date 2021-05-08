@@ -1,64 +1,58 @@
 * {
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-  }
-.colors{
-    display: flex;
-    height:  70vh; 
-    flex-wrap: wrap;
-   
+  margin    : 0;
+  padding   : 0;
+  box-sizing: border-box;
+}
 
+.colors {
+  display  : flex;
+  height   : 70vh;
+  flex-wrap: wrap;
 }
-  .colors > div {
-   flex: 1 1 1rem;
-   width:10rem;
-   height:  100%;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-  }
-  /* span{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   
-  } */
-.btns{
-    margin: 5%;
-    display: flex;
-    justify-content: space-around;
-    border-radius: 8px;
-    height: 16vh;
-    
 
+.colors > div {
+  padding        : 2rem;
+  flex           : 1 1 5rem;
+  width          : 10rem;
+  display        : flex;
+  flex-flow      : column nowrap;
+  align-items    : center;
+  justify-content: space-evenly;
 }
-.btn{
-    /* width: 40%; */
-    padding:45px;
-    background-color: white;
-    border: 1 px solid gray;
-    border-radius: 8px;
-    margin-bottom: 18px;
+
+.btns {
+  margin         : 5%;
+  display        : flex;
+  justify-content: space-around;
+  align-items    : center;
+  height         : 16vh;
 }
-p{
-    font-size: large;
+
+.btn {
+  padding         : 10px;
+  background-color: white;
+  border          : 1 px solid gray;
+  border-radius   : 8px;
+  margin-bottom   : 18px;
 }
-span{
-    font-size: large;
+
+p {
+  font-size: large;
+}
+
+span {
+  font-size: large;
 }
 
 .custom-checkbox input[type="checkbox"],
 .custom-checkbox .checked {
-display: none;
+  display: none;
 }
 
-.custom-checkbox input[type="checkbox"]:checked ~ .checked
-{
-display: inline-block;
+.custom-checkbox input[type="checkbox"]:checked ~ .checked {
+  display: inline-block;
 }
 
-.custom-checkbox input[type="checkbox"]:checked ~ .unchecked
-{
-display: none;
+.custom-checkbox input[type="checkbox"]:checked ~ .unchecked {
+  display: none;
 }
