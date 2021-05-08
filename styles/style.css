@@ -35,10 +35,11 @@
 }
 .btn{
     /* width: 40%; */
-    padding:60px;
+    padding:45px;
     background-color: white;
     border: 1 px solid gray;
     border-radius: 8px;
+    margin-bottom: 18px;
 }
 p{
     font-size: large;
