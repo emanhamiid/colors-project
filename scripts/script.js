@@ -1,4 +1,4 @@
-class Colors {
+gitclass Colors {
   constructor() {
     this.profiles = [];
   }

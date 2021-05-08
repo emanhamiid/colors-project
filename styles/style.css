@@ -3,14 +3,14 @@
     padding:0;
     box-sizing: border-box;
   }
-.columns{
+.colors{
     display: flex;
     height:  70vh; 
     flex-wrap: wrap;
    
 
 }
-  .col {
+  .colors > div {
    flex: 1 1 1rem;
    width:10rem;
    height:  100%;
@@ -24,6 +24,40 @@
     justify-content: center;
    
   } */
+.btns{
+    margin: 5%;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 8px;
+    height: 16vh;
+    
 
+}
+.btn{
+    /* width: 40%; */
+    padding:60px;
+    background-color: white;
+    border: 1 px solid gray;
+    border-radius: 8px;
+}
+p{
+    font-size: large;
+}
+span{
+    font-size: large;
+}
 
- 
+.custom-checkbox input[type="checkbox"],
+.custom-checkbox .checked {
+display: none;
+}
+
+.custom-checkbox input[type="checkbox"]:checked ~ .checked
+{
+display: inline-block;
+}
+
+.custom-checkbox input[type="checkbox"]:checked ~ .unchecked
+{
+display: none;
+}
