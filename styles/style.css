@@ -97,3 +97,45 @@ span {
   border-radius: 5%;
   font-size: 14px;
 }
+.pop-up-model{
+  display: visible; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 60%; 
+  height: 60%; 
+  overflow: auto; 
+ 
+}
+.pop-up-model-content{
+  /* display        : flex;
+  flex-direction: column;
+  justify-content: space-around; */
+  align-items    : center;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width:50%;
+  height: 80%;
+}
+.pop-up-model-content > h1 {
+  margin-left: 100px;
+}
+.content{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.content > button {
+ 
+  width: 70px;
+  height: 70px;
+
+}
+.content > h1{
+  margin-left: 60px;
+}
