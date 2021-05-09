@@ -1,12 +1,25 @@
-class Colors {
+class Pallete {
+  constructor(name, colors) {
+    this.name = name;
+    this.colors = colors;
+  }
+}
+
+class Pallets {
   constructor() {
-    this.palletes = [];
+    this.savedPalletes = [];
+    this.workingPallete;
   }
 
-  addPallete(pallete) {
-    this.palletes.push(pallete);
+  saveWorkingPallete(name) {
+    this.savedPalletes.push(name, this.wokringPallete);
   }
 
+  // setWorkingPallete(pallete) {
+  //   this.workingPallete = show(pallete);
+  // }
+
+  //https://www.tutorialspoint.com/javascript-to-generate-random-hex-codes-of-color
   static get randomHex() {
     const hexCode = "0123456789ABCDEF";
     let hex = '#';
@@ -16,7 +29,7 @@ class Colors {
     return hex;
   }
 }
-const userColors = new Colors();
+const userPallets = new Pallets();
 
 function generatePallete(e) {
   const pallete = [];
@@ -28,21 +41,33 @@ function generatePallete(e) {
     const doNotChangeColor = color.querySelector('input');
     if (doNotChangeColor.checked)
       return pallete.push(color.style.backgroundColor);
-    const randomHex = Colors.randomHex;
+    const randomHex = Pallets.randomHex;
     color.style.backgroundColor = randomHex;
     color.querySelector('div')
       .innerText = randomHex;
     pallete.push(randomHex);
   });
-  return pallete;
+  userPallets.workingPallete = pallete;
 }
 
 function showPallets(e) {
+  // unhide popup with all the
   return;
 }
 
 function savePallete(e) {
+  const palleteSaveDiv = document.querySelector('#pallete-save-form');
+  palleteSaveDiv.style.display = 'block';
 
+  const palleteSaveForm = palleteSaveDiv.querySelector('form');
+  palleteSaveForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const name = formData.get('pallete-name');
+    userPallets.saveWorkingPallete(name);
+
+    palleteSaveDiv.style.display = 'none';
+  });
 }
 
 document.querySelector('#generate-btn')

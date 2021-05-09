@@ -56,3 +56,12 @@ span {
 .custom-checkbox input[type="checkbox"]:checked ~ .unchecked {
   display: none;
 }
+
+.pop-up {
+  display: none;
+}
+
+.pop-up > form {
+  display       : flex;
+  flex-direction: column;
+}
