@@ -70,11 +70,22 @@ function savePallete(e) {
   });
 }
 
-document.querySelector('#generate-btn')
-  .addEventListener('click', generatePallete);
+function handleButtonClicks(e) {
+  let element = e.target;
 
-document.querySelector('#library-btn')
-  .addEventListener('click', showPallets);
+  while (element) {
+    if (element.nodeName === "BUTTON") {
+      const btnValue = element.value;
+      if (btnValue === 'generate') generatePallete();
 
-document.querySelector('#save-btn')
-  .addEventListener('click', savePallete);
+      if (btnValue === 'library') showPallets();
+
+      if (btnValue === 'save-pallete') savePallete();
+
+      break;
+    }
+    element = element.parentNode;
+  }
+}
+document.querySelector('.btns')
+  .addEventListener('click', handleButtonClicks);
