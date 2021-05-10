@@ -13,6 +13,7 @@ class Palettes {
 
   saveWorkingPalette(name) {
     this.savedPalettes.push(new Palette(name, [...this.workingPalette]));
+    savePalettesToLocal();
   }
 
   //https://www.tutorialspoint.com/javascript-to-generate-random-hex-codes-of-color
@@ -76,7 +77,6 @@ function loadPalette(colors) {
 
 const savedPalettesPopUp = document.querySelector('#saved-palettes-popup');
 savedPalettesPopUp.parentNode.addEventListener('click', e => {
-  console.log(e.target.value);
   if (e.target.classList.contains('pop-up'))
     savedPalettesPopUp.style.visibility = 'hidden';
 
@@ -126,21 +126,19 @@ function showSavedPalettes(e) {
   }
 }
 
+const paletteSaveDiv = document.querySelector('#palette-save-form');
+const paletteSaveForm = paletteSaveDiv.querySelector('form');
+paletteSaveForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const name = formData.get('palette-name');
+  userPalettes.saveWorkingPalette(name);
+
+  paletteSaveDiv.style.visibility = 'hidden';
+});
+
 function savePalette(e) {
-  const paletteSaveDiv = document.querySelector('#palette-save-form');
   paletteSaveDiv.style.visibility = 'visible';
-
-  const paletteSaveForm = paletteSaveDiv.querySelector('form');
-  paletteSaveForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const name = formData.get('palette-name');
-    userPalettes.saveWorkingPalette(name);
-
-    paletteSaveDiv.style.visibility = 'hidden';
-  });
-
-  savePalettesToLocal();
 }
 
 function handleButtonClicks(e) {

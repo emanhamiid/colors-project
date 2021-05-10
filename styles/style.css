@@ -42,7 +42,7 @@ p {
 span {
   font-size: large;
 }
-
+/* https://stackhowto.com/how-to-style-css-checkboxes-with-font-awesome/ */
 .custom-checkbox input[type="checkbox"],
 .custom-checkbox .checked {
   display: none;
