@@ -1,4 +1,4 @@
-class Pallete {
+class Palette {
   constructor(name, colors) {
     this.name = name;
     this.colors = colors;
@@ -7,17 +7,13 @@ class Pallete {
 
 class Pallets {
   constructor() {
-    this.savedPalletes = [];
-    this.workingPallete;
+    this.savedPalettes = [];
+    this.workingPalette;
   }
 
-  saveWorkingPallete(name) {
-    this.savedPalletes.push(name, this.wokringPallete);
+  saveWorkingPalette(name) {
+    this.savedPalettes.push(new Palette(name, [...this.workingPalette]));
   }
-
-  // setWorkingPallete(pallete) {
-  //   this.workingPallete = show(pallete);
-  // }
 
   //https://www.tutorialspoint.com/javascript-to-generate-random-hex-codes-of-color
   static get randomHex() {
@@ -31,8 +27,8 @@ class Pallets {
 }
 const userPallets = new Pallets();
 
-function generatePallete(e) {
-  const pallete = [];
+function generatePalette(e) {
+  const palette = [];
 
   const colorDivs = Array.from(document.querySelector(".colors")
     .children);
@@ -40,33 +36,65 @@ function generatePallete(e) {
   colorDivs.forEach(color => {
     const doNotChangeColor = color.querySelector('input');
     if (doNotChangeColor.checked)
-      return pallete.push(color.style.backgroundColor);
+      return palette.push(color.style.backgroundColor);
     const randomHex = Pallets.randomHex;
     color.style.backgroundColor = randomHex;
     color.querySelector('div')
       .innerText = randomHex;
-    pallete.push(randomHex);
+    palette.push(randomHex);
   });
-  userPallets.workingPallete = pallete;
+  userPallets.workingPalette = palette;
 }
 
 function showPallets(e) {
-  // unhide popup with all the
-  return;
+  const savedPalletsPopUp = document.querySelector('#saved-palettes-popup');
+  savedPalletsPopUp.style.visibility = 'visible';
+
+  userPallets.savedPalettes.forEach((palette, index) => createListing(palette, index));
+
+  function createListing(palette, index) {
+    const list = savedPalletsPopUp.querySelector('#saved-palettes-list');
+
+    const listItem = document.createElement('div');
+    listItem.classList.add('list-item');
+    list.append(listItem);
+
+    const name = document.createElement('label');
+    name.for = index;
+    name.innerText = palette.name;
+    listItem.append(name);
+
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('palette-button-wrapper');
+    listItem.append(wrapper);
+
+    const paletteDisplay = document.createElement('div');
+    paletteDisplay.classList.add('mini-palette-display');
+    palette.colors.forEach(colorHex => {
+      const color = document.createElement('div');
+      color.style.backgroundColor = colorHex;
+      paletteDisplay.append(color);
+    });
+    wrapper.append(paletteDisplay);
+
+    const btn = document.createElement('button');
+    btn.innerText = 'Select';
+    wrapper.append(btn);
+  }
 }
 
-function savePallete(e) {
-  const palleteSaveDiv = document.querySelector('#pallete-save-form');
-  palleteSaveDiv.style.visibility = 'visible';
+function savePalette(e) {
+  const paletteSaveDiv = document.querySelector('#palette-save-form');
+  paletteSaveDiv.style.visibility = 'visible';
 
-  const palleteSaveForm = palleteSaveDiv.querySelector('form');
-  palleteSaveForm.addEventListener('submit', e => {
+  const paletteSaveForm = paletteSaveDiv.querySelector('form');
+  paletteSaveForm.addEventListener('submit', e => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const name = formData.get('pallete-name');
-    userPallets.saveWorkingPallete(name);
+    const name = formData.get('palette-name');
+    userPallets.saveWorkingPalette(name);
 
-    palleteSaveDiv.style.visibility = 'hidden';
+    paletteSaveDiv.style.visibility = 'hidden';
   });
 }
 
@@ -76,11 +104,11 @@ function handleButtonClicks(e) {
   while (element) {
     if (element.nodeName === "BUTTON") {
       const btnValue = element.value;
-      if (btnValue === 'generate') generatePallete();
+      if (btnValue === 'generate') generatePalette();
 
       if (btnValue === 'library') showPallets();
 
-      if (btnValue === 'save-pallete') savePallete();
+      if (btnValue === 'save-palette') savePalette();
 
       break;
     }

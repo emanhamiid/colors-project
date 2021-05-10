@@ -81,7 +81,7 @@ span {
 }
 
 .pop-up-content > * {
-  margin: .4rem 0;
+  margin: .3rem 0;
 }
 
 .list {
@@ -97,16 +97,16 @@ span {
   width          : 400px;
 }
 
-.pallete-button-wrapper {
+.palette-button-wrapper {
   display: flex;
 }
 
-.mini-pallete-colors {
+.mini-palette-display {
   display        : flex;
   justify-content: flex-end;
 }
 
-.mini-pallete-colors > div {
+.mini-palette-display > div {
   display: inline-block;
   width  : 20px;
 }
