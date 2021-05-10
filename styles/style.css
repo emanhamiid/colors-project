@@ -95,6 +95,13 @@ span {
   justify-content: space-between;
   flex-flow      : row nowrap;
   width          : 400px;
+  min-height     : 2rem;
+  margin         : .2rem 0;
+}
+
+.name {
+  display: inline;
+  width  : 40%;
 }
 
 .palette-button-wrapper {
@@ -104,9 +111,11 @@ span {
 .mini-palette-display {
   display        : flex;
   justify-content: flex-end;
+  --display-width: 150px;
+  width          : var(--display-width);
 }
 
 .mini-palette-display > div {
   display: inline-block;
-  width  : 20px;
+  width  : calc(var(--display-width) / 6);
 }

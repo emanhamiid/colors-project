@@ -1,5 +1,5 @@
 class Palette {
-  constructor(name, colors) {
+  constructor(name, colors = []) {
     this.name = name;
     this.colors = colors;
   }
@@ -26,6 +26,7 @@ class Pallets {
   }
 }
 const userPallets = new Pallets();
+generatePalette();
 
 function generatePalette(e) {
   const palette = [];
@@ -46,14 +47,38 @@ function generatePalette(e) {
   userPallets.workingPalette = palette;
 }
 
-function showPallets(e) {
-  const savedPalletsPopUp = document.querySelector('#saved-palettes-popup');
+function loadPalette(colors) {
+  const colorDivs = Array.from(document.querySelector(".colors")
+    .children);
+  colorDivs.forEach((div, index) => {
+    div.style.backgroundColor = colors[index];
+    div.querySelector('div')
+      .innerText = colors[index];
+  });
+  this.workingPalette = colors;
+}
+
+const savedPalletsPopUp = document.querySelector('#saved-palettes-popup');
+savedPalletsPopUp.parentNode.addEventListener('click', e => {
+  console.log(e.target.value);
+  if (e.target.classList.contains('pop-up'))
+    savedPalletsPopUp.style.visibility = 'hidden';
+
+  if (e.target.classList.contains('palette-select-btn')) {
+    let selectedIndex = e.target.value;
+    savedPalletsPopUp.style.visibility = 'hidden';
+    loadPalette(userPallets.savedPalettes[selectedIndex].colors);
+  }
+});
+
+function showSavedPalettes(e) {
   savedPalletsPopUp.style.visibility = 'visible';
 
   userPallets.savedPalettes.forEach((palette, index) => createListing(palette, index));
 
   function createListing(palette, index) {
     const list = savedPalletsPopUp.querySelector('#saved-palettes-list');
+    list.innerHTML = '';
 
     const listItem = document.createElement('div');
     listItem.classList.add('list-item');
@@ -78,6 +103,8 @@ function showPallets(e) {
     wrapper.append(paletteDisplay);
 
     const btn = document.createElement('button');
+    btn.classList.add('palette-select-btn');
+    btn.value = index;
     btn.innerText = 'Select';
     wrapper.append(btn);
   }
@@ -106,7 +133,7 @@ function handleButtonClicks(e) {
       const btnValue = element.value;
       if (btnValue === 'generate') generatePalette();
 
-      if (btnValue === 'library') showPallets();
+      if (btnValue === 'library') showSavedPalettes();
 
       if (btnValue === 'save-palette') savePalette();
 
@@ -114,6 +141,8 @@ function handleButtonClicks(e) {
     }
     element = element.parentNode;
   }
+
+
 }
 document.querySelector('.btns')
   .addEventListener('click', handleButtonClicks);
