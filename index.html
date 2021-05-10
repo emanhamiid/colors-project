@@ -73,17 +73,17 @@
     </div>
 
     <div class="btns">
-      <button value="library"><i class="fas fa-book-open fa-3x"></i>
+      <button class='btn' value="library"><i class="fas fa-book-open fa-3x"></i>
         <p>Library</p>
       </button>
 
 
-      <button value="generate"><i class="fas fa-cog fa-3x"></i>
+      <button class='btn' value="generate"><i class="fas fa-cog fa-3x"></i>
         <p>Generator</p>
       </button>
 
 
-      <button value="save-pallete"><i class="fas fa-save fa-3x"></i>
+      <button class='btn' value="save-pallete"><i class="fas fa-save fa-3x"></i>
         <p>Save</p>
       </button>
     </div>
@@ -92,16 +92,31 @@
       <form class="pop-up-content">
         <label for="pallete-name">Give a name to your pallete</label>
         <input type="text" id="pallete-name" name="pallete-name" autofocus placeholder="eg gym website pallete">
-        <input type="submit" value="Save">
+        <input class="btn" type="submit" value="Save">
       </form>
     </div>
 
-    <div class="pop-up-model" id="saved-palletes">
-      <div class="pop-up-model-content">
-        <h1>Pick Your Pallete</h1>
-        <div class="content">
-          <h1 class="header">newone</h1>
-          <button class="selectbtn">Select</button>
+    <div class="pop-up" id="saved-palletes">
+      <div class="pop-up-content">
+
+        <label for="saved-pallets-list">Pick Your Pallete</label>
+        <div class="list" id="saved-pallets-list">
+
+          <div class="saved-pallet list-item">
+            <label for="pallete1">pallete name</label>
+            <div class="pallete-button-wrapper">
+              <div class="mini-pallete-colors" id='pallete1'>
+                <div style="background-color: red;"></div>
+                <div style="background-color: blue;"></div>
+                <div style="background-color: black;"></div>
+                <div style="background-color: green;"></div>
+                <div style="background-color: orange;"></div>
+                <div style="background-color: purple;"></div>
+              </div>
+              <button>Select</button>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
