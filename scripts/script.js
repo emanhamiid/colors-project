@@ -57,7 +57,7 @@ function showPallets(e) {
 
 function savePallete(e) {
   const palleteSaveDiv = document.querySelector('#pallete-save-form');
-  palleteSaveDiv.style.display = 'block';
+  palleteSaveDiv.style.visibility = 'visible';
 
   const palleteSaveForm = palleteSaveDiv.querySelector('form');
   palleteSaveForm.addEventListener('submit', e => {
@@ -66,7 +66,7 @@ function savePallete(e) {
     const name = formData.get('pallete-name');
     userPallets.saveWorkingPallete(name);
 
-    palleteSaveDiv.style.display = 'none';
+    palleteSaveDiv.style.visibility = 'hidden';
   });
 }
 
