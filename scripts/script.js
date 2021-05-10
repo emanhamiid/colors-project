@@ -5,9 +5,9 @@ class Palette {
   }
 }
 
-class Pallets {
-  constructor() {
-    this.savedPalettes = [];
+class Palettes {
+  constructor(savedPalettes = []) {
+    this.savedPalettes = savedPalettes;
     this.workingPalette;
   }
 
@@ -25,8 +25,24 @@ class Pallets {
     return hex;
   }
 }
-const userPallets = new Pallets();
-generatePalette();
+
+let userPalettes;
+loadFromLocal();
+
+userPalettes.workingPalette ? loadPalette(userPalettes.workingPalette) : generatePalette();
+
+function loadFromLocal() {
+  userPalettes = Object.assign(new Palettes(), JSON.parse(localStorage.getItem('userPalettes')));
+  if (!userPalettes) {
+    userPalettes = new Palettes();
+    savePalettesToLocal();
+  }
+}
+
+function savePalettesToLocal() {
+  const userPalettesSerialized = JSON.stringify(userPalettes);
+  localStorage.setItem('userPalettes', userPalettesSerialized);
+}
 
 function generatePalette(e) {
   const palette = [];
@@ -38,13 +54,13 @@ function generatePalette(e) {
     const doNotChangeColor = color.querySelector('input');
     if (doNotChangeColor.checked)
       return palette.push(color.style.backgroundColor);
-    const randomHex = Pallets.randomHex;
+    const randomHex = Palettes.randomHex;
     color.style.backgroundColor = randomHex;
     color.querySelector('div')
       .innerText = randomHex;
     palette.push(randomHex);
   });
-  userPallets.workingPalette = palette;
+  userPalettes.workingPalette = palette;
 }
 
 function loadPalette(colors) {
@@ -58,27 +74,27 @@ function loadPalette(colors) {
   this.workingPalette = colors;
 }
 
-const savedPalletsPopUp = document.querySelector('#saved-palettes-popup');
-savedPalletsPopUp.parentNode.addEventListener('click', e => {
+const savedPalettesPopUp = document.querySelector('#saved-palettes-popup');
+savedPalettesPopUp.parentNode.addEventListener('click', e => {
   console.log(e.target.value);
   if (e.target.classList.contains('pop-up'))
-    savedPalletsPopUp.style.visibility = 'hidden';
+    savedPalettesPopUp.style.visibility = 'hidden';
 
   if (e.target.classList.contains('palette-select-btn')) {
     let selectedIndex = e.target.value;
-    savedPalletsPopUp.style.visibility = 'hidden';
-    loadPalette(userPallets.savedPalettes[selectedIndex].colors);
+    savedPalettesPopUp.style.visibility = 'hidden';
+    loadPalette(userPalettes.savedPalettes[selectedIndex].colors);
   }
 });
 
 function showSavedPalettes(e) {
-  savedPalletsPopUp.style.visibility = 'visible';
+  savedPalettesPopUp.style.visibility = 'visible';
+  const list = savedPalettesPopUp.querySelector('#saved-palettes-list');
+  list.innerHTML = '';
 
-  userPallets.savedPalettes.forEach((palette, index) => createListing(palette, index));
+  userPalettes.savedPalettes.forEach((palette, index) => createListing(palette, index));
 
   function createListing(palette, index) {
-    const list = savedPalletsPopUp.querySelector('#saved-palettes-list');
-    list.innerHTML = '';
 
     const listItem = document.createElement('div');
     listItem.classList.add('list-item');
@@ -119,10 +135,12 @@ function savePalette(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const name = formData.get('palette-name');
-    userPallets.saveWorkingPalette(name);
+    userPalettes.saveWorkingPalette(name);
 
     paletteSaveDiv.style.visibility = 'hidden';
   });
+
+  savePalettesToLocal();
 }
 
 function handleButtonClicks(e) {
